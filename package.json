@@ -17,6 +17,7 @@
     "@apollo/server": "^4.10.4",
     "dataloader": "^2.2.2",
     "graphql": "^16.9.0",
-    "graphql-compose": "^9.0.11"
+    "graphql-compose": "^9.0.11",
+    "mysql2": "^3.10.1"
   }
 }
