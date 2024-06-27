@@ -1,6 +1,5 @@
 import { ObjectTypeComposer } from "graphql-compose";
 import { ArticleType } from "./ArticleType.js";
-import { query } from "../../db/Query.js";
 import { GraphQLInt } from "graphql";
 
 export const ArticleListType = ObjectTypeComposer.createTemp({
@@ -22,11 +21,8 @@ ArticleListType.addResolver({
     }
   },
   resolve: async ({source, args, context}) => {
-    const {limit, offset} = args;
     return {
-      node: await query(
-        `Select * from Article limit ${limit} offset ${offset}`
-      ),
+      node: await context.services.article.getArticles(args),
     };
   },
 });

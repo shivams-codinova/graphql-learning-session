@@ -1,7 +1,6 @@
 import {ObjectTypeComposer, GraphQLDate} from 'graphql-compose'
 import {GraphQLID, GraphQLNonNull, GraphQLString} from 'graphql';
 import { AuthorType } from "./AuthorType.js";
-import { query } from "../../db/Query.js";
 
 export const ArticleType = ObjectTypeComposer.createTemp({
     name: 'Article',
@@ -14,7 +13,7 @@ export const ArticleType = ObjectTypeComposer.createTemp({
             type: AuthorType,
             resolve : async (parent, args, context) => {
                 const { authorId } = parent;
-                const author = await query(`Select * from Author where id = "${authorId}"`)
+                const author = await context.services.author.getAuthorById(authorId)
                 return author[0];
             }
         }
