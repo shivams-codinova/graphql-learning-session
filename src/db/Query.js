@@ -5,7 +5,7 @@ export const query = async (sql) => {
         const [results] = await db.query(sql);
         return results
       } catch (err) {
-        console.log(err);
+        console.log("error in excuting sql query", err);
       }
 
 }

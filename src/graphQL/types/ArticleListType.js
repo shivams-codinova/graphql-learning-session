@@ -1,27 +1,16 @@
 import { ObjectTypeComposer } from "graphql-compose";
 import { ArticleType } from "./ArticleType.js";
-import { GraphQLInt } from "graphql";
+import { query } from "../../db/Query.js";
 
 export const ArticleListType = ObjectTypeComposer.createTemp({
   name: "ArticleList",
-  fields: {
-    nodes: ArticleType.NonNull.List.NonNull,
-  },
+  fields: ArticleType.NonNull.List.NonNull,
 });
 
 ArticleListType.addResolver({
   name: "getArticles",
   type: ArticleListType.NonNull,
-  resolve: () => {
-    return {
-      nodes: [
-        {
-          id: "1234NHJEE45",
-          title: "Article Title",
-          content: "Article Content",
-          createdAt: new Date(),
-        },
-      ],
-    };
+  resolve: async () => {
+    return await query("Select * from Article")
   },
 });

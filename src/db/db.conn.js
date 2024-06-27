@@ -6,6 +6,7 @@ const connection = async () => {
       host: "54.89.0.234",
       user: "shivam",
       password: "password",
+      database: "GraphQLSession"
     });
     return conn;
   } catch (error) {console.log("error connecting the server", error)}
