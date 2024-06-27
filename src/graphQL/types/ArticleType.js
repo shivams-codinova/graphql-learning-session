@@ -13,8 +13,8 @@ export const ArticleType = ObjectTypeComposer.createTemp({
             type: AuthorType,
             resolve : async (parent, args, context) => {
                 const { authorId } = parent;
-                const author = await context.services.author.getAuthorById(authorId)
-                return author[0];
+                const author = await context.dataLoader.authorDataLoader.load(authorId)
+                return author;
             }
         }
     }

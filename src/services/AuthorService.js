@@ -10,4 +10,8 @@ export class AuthorService {
         return query( `Select * from Author where id = "${id}"`);
     }
 
+    async getAuthorByIds(ids) {
+        return query( `Select * from Author where id in (${ids.map(id=> `'${id}'`)})`);
+    }
+
 }
